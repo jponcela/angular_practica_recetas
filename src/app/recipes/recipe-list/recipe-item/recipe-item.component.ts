@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Recipe } from '../../recipe.model';
 
@@ -9,16 +9,16 @@ import { Recipe } from '../../recipe.model';
 })
 export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe;
-  @Output() recipeSelected = new EventEmitter<void>();
+  @Input() index: number; //si le paso el id puedo directamenteobtener la recipe del servicio
 
-  constructor() { }
+  //constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
   }
 
-  onRecipeSelected(){
-    this.recipeSelected.emit();
-  }
+  //onRecipeSelected(){ se pasa el valor por parametro en la url
+  //  this.recipeService.recipeSelected.emit(this.recipe);
+  //}
 
 
 }
