@@ -8,14 +8,21 @@
         <h1>{{ recipe.name }}</h1>
     </div>
 </div>
+
+<div class="row" style="border:2px">
+    <mat-chip-list aria-label="tags">
+        <mat-chip color="accent" selected *ngFor="let tag of recipe.tags">{{tag.name}}</mat-chip>
+    </mat-chip-list>
+</div>
+
 <div class="row">
     <div class="col-xs-12">
         <div class="btn-group" appDropdown>
-            <button type="button"class="btn btn-primary dropdown-toggle">Manage Recipe<span class="caret"></span></button>
+            <button type="button"class="btn btn-primary dropdown-toggle">Opciones de Receta <span class="caret"></span></button>
             <ul class="dropdown-menu">
-                <li><a (click)="onAddToShoppingList()" style="cursor: pointer;">add ingredient to shopping list</a></li>
-                <li><a style="cursor: pointer;" (click)="onEditRecipe()">edit recipe</a></li>
-                <li><a style="cursor: pointer;" (click)="onDeleteRecipe()">delete recipe</a></li>
+                <li><a (click)="onAddToShoppingList()" style="cursor: pointer;">Agregar Ingredientes a la Lista de Compra</a></li>
+                <li><a style="cursor: pointer;" (click)="onEditRecipe()">Editar Receta</a></li>
+                <li><a style="cursor: pointer;" (click)="onDeleteRecipe()">Eliminar Receta</a></li>
             </ul>
         </div>
     </div>
@@ -25,13 +32,14 @@
         {{ recipe.description }}
     </div>
 </div>
+<hr>
 <div class="row">
     <div class="col-xs-12">
-        <ul class="list-group">
-            <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
+        <mat-list>
+            <mat-list-item *ngFor="let ingredient of recipe.ingredients">
                 {{ingredient.name}}: {{ingredient.amount}}
-            </li>
-
-        </ul>
+                <mat-divider [inset]="true"></mat-divider>
+            </mat-list-item>
+        </mat-list>
     </div>
 </div>

@@ -1,18 +1,15 @@
 <div class="row">
     <div class="col-xs-10">
-        <app-shopping-edit>
-
-        </app-shopping-edit>
+        <app-shopping-edit></app-shopping-edit>
         <hr>
-        <ul class="list-group">
-            <a 
-            class="list-group-item" 
+        <mat-list>
+            <mat-list-item 
             style="cursor: pointer" 
             *ngFor="let ingredient of ingredients; let i = index"
             (click)="onEdit(i)"
-            
-            >{{ ingredient.name }} ({{ ingredient.amount }})</a>
-
-        </ul>
+            >{{ ingredient.name }} ({{ ingredient.amount }})
+            <mat-divider [inset]="true"></mat-divider>
+        </mat-list-item>
+        </mat-list>
     </div>
 </div>

@@ -48,8 +48,20 @@ export class RecipeEditComponent implements OnInit {
     );
   }
 
+  onAddTag() {
+    (<FormArray>this.recipeForm.get('tags')).push(
+      new FormGroup({
+        'name': new FormControl(null, Validators.required)
+      })
+    );
+  }
+
   onDeleteIngredient(index: number) {
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
+  }
+
+  onDeleteTag(index:number) {
+    (<FormArray>this.recipeForm.get('tags')).removeAt(index);
   }
 
   onCancel() {
@@ -60,6 +72,7 @@ export class RecipeEditComponent implements OnInit {
     let recipeName = '';
     let recipeImagePath = '';
     let recipeDescription = '';
+    let recipeTags = new FormArray([]);
     let recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
@@ -80,12 +93,22 @@ export class RecipeEditComponent implements OnInit {
           );
         }
       }
+      if(recipe['tags']) {
+        for (let tag of recipe.tags) {
+          recipeTags.push(
+            new FormGroup({
+              'name': new FormControl(tag.name, Validators.required)
+            })
+          )
+        }
+      }
     }
 
     this.recipeForm = new FormGroup({
       'name': new FormControl(recipeName, Validators.required),
       'imagePath': new FormControl(recipeImagePath, Validators.required),
       'description': new FormControl(recipeDescription, Validators.required),
+      'tags': recipeTags,
       'ingredients': recipeIngredients
     });
   }
